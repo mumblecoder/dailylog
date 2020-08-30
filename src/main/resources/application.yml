@@ -1,7 +1,7 @@
 spring:
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/dailylog?characterEncoding=UTF-8&serverTimezone=UTC 
+    url: jdbc:postgresql://localhost:5432/dailylog
     username: postgres
     password: 1234
 
