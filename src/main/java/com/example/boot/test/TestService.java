@@ -17,4 +17,8 @@ public class TestService {
 		return repository.findAll();
 	}
 
+	public Diary insert(Diary diary) {
+		return repository.save(diary);
+	}
+
 }
