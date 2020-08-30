@@ -21,4 +21,8 @@ public class TestService {
 		return repository.save(diary);
 	}
 
+	public void delete(Diary diary) {
+		repository.deleteById(diary.getSeq());
+	}
+
 }
