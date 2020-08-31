@@ -21,8 +21,9 @@ public class TestService {
 		return repository.save(diary);
 	}
 
-	public void delete(Diary diary) {
+	public boolean delete(Diary diary) {
 		repository.deleteById(diary.getSeq());
+		return repository.findById(diary.getSeq()).orElseGet(null) == null;
 	}
 
 }

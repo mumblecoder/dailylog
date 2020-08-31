@@ -2,6 +2,7 @@ package com.example.boot.test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +26,11 @@ public class TestController {
 	@PostMapping
 	public ResponseEntity<?> insert(@RequestBody Diary diary){
 		return ResponseEntity.ok(service.insert(diary));
+	}
+	
+	@DeleteMapping
+	public ResponseEntity<?> delete(@RequestBody Diary diary){
+		return ResponseEntity.ok(service.delete(diary));
 	}
 	
 }
