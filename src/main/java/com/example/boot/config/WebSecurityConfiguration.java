@@ -25,8 +25,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 
 		http
 	        .authorizeRequests()
-	            .antMatchers("/test/**").permitAll()
-	            .antMatchers("/admin").hasRole("ADMIN")
+	            .antMatchers("/test").permitAll()
+//	            .antMatchers("/admin").hasRole("ADMIN")
 	            .anyRequest().authenticated()
 	            .and()
 	        .formLogin()
@@ -48,7 +48,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/templates/**");
+        web.ignoring().antMatchers("/templates/**" , "/test/**", "/user");
     }
 	
 	
