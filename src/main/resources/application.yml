@@ -4,4 +4,9 @@ spring:
     url: jdbc:postgresql://localhost:5432/dailylog
     username: postgres
     password: 1234
-
+  thymeleaf:
+    prefix: classpath:templates/
+    check-template-location: true
+    suffix: .html
+    mode: HTML5
+    cache: false

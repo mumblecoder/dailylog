@@ -19,7 +19,6 @@ public class UserController {
 	
 	@PostMapping()
 	public ResponseEntity<?> join(@RequestBody UserInfo user){
-		System.out.println("dddd");
 		return ResponseEntity.ok(service.join(user));
 	}
 	
