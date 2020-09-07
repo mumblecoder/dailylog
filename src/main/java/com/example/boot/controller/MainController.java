@@ -13,4 +13,11 @@ public class MainController {
 		return mav;
 	}
 	
+	@GetMapping("/calendar")
+	public ModelAndView calendar() {
+		ModelAndView mav = new ModelAndView("calendar");
+		return mav;
+	}
+	
+	
 }
