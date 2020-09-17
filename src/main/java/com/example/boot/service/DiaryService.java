@@ -20,8 +20,12 @@ public class DiaryService {
 		return repository.save(diary);
 	}
 	
-	public void deleteDiary(int seq) {
+	public boolean deleteDiary(int seq) {
 		repository.deleteById(seq);
+		if (repository.findById(seq).orElseGet(null) == null) {
+			return true;
+		}
+		return false;
 	}
 	
 }
