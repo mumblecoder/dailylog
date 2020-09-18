@@ -7,7 +7,6 @@
 <div layout:fragment="content">
 
 	<div id="page" style="opacity: 1;">
-
 		<div id="page-preloader">
 			<div class="loader-main loader-inactive">
 				<div class="preload-spinner border-highlight"></div>
@@ -15,7 +14,6 @@
 		</div>
 
 		<div class="page-content">
-
 			<div class="page-title-large color-white bottom-30">
 				<h1 data-username="Enabled!" class="greeting-text">
 					Good evening,<br>Enabled!
@@ -36,7 +34,6 @@
 				style="height: 210px;">
 				<!-- background color -->
 			</div>
-
 
 			<div class="calendar round-small shadow-small">
 				<div class="cal-header">
@@ -60,7 +57,7 @@
 					<div class="clear"></div>
 				</div>
 				<div class="cal-dates cal-dates-border">
-					<a href="#" class="cal-disabled">25</a>
+					<!-- <a href="#" class="cal-disabled">25</a>
 					<a href="#" class="cal-disabled">26</a> 
 					<a href="#" class="cal-disabled">27</a>
 					<a href="#" class="cal-disabled">28</a> 
@@ -102,15 +99,55 @@
 					<a href="#" class="cal-disabled">3</a> 
 					<a href="#" class="cal-disabled">4</a>
 					<a href="#" class="cal-disabled">5</a>
-					<div class="clear"></div>
+					<div class="clear"></div> -->
 				</div>
 			</div>
 
 		</div>
 	</div>
+<script>
+$(function(){
+	
+	var now = new Date();
+	createCalendar(now);
+	
+	function createCalendar(date){
+		var year = date.getFullYear();
+		var month = date.getMonth();
+		var day = date.getDate();
+		var title = $(".cal-title");
+		title.text((month+1) + "월")
+		
+		var lastMonthEndDate = new Date(year, month, 0);
+		var dayOfWeek = lastMonthEndDate.getDay();
+		var lastDate = lastMonthEndDate.getDate();
+		
+		var wrapper = $(".cal-dates-border");
+		for(var i = dayOfWeek; i > -1; i--) {
+		    wrapper.append("<a href='#' class='cal-disabled'>"+(lastDate-i)+"</a>");
+		}
+		
+		if (month == 11){
+			year++;
+			month = 0;
+		} else {
+			month++;
+		}
+		var dayOfWeek = date.getDay();
+		var endDate = new Date(year, month, 0);
+		var date = endDate.getDate(); 
+		for(var i = 1; i < date+1; i++){
+		    wrapper.append("<a href='#'>"+i+"</a>");
+		}
+		for (var i = 1; i<7-endDate.getDay(); i++){
+		    wrapper.append("<a href='#' class='cal-disabled'>"+i+"</a>");
+		}
+	}
+	
+});
 
 
-
+</script>
 </div>
 
 

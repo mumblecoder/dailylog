@@ -4,6 +4,9 @@
     <!-- 공통 헤더-->
     <th:block th:replace="fragments/head :: headFragment"></th:block>
 
+    <!-- 공통 스크립트-->
+    <th:block th:replace="fragments/script :: scriptFragment"></th:block>
+
     <body class="is-not-ios theme-light">
         <div id="wrapper">
             <div id="content-wrapper" class="d-flex flex-column">
@@ -17,8 +20,5 @@
                 <th:block th:replace="fragments/footer :: footerFragment"></th:block>
             </div>
         </div>
-
-        <!-- 공통 스크립트-->
-        <th:block th:replace="fragments/script :: scriptFragment"></th:block>
     </body>
 </html>
