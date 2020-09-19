@@ -39,10 +39,10 @@
 				<div class="cal-header">
 					<h4 class="cal-title center-text uppercase bolder bg-dark2-light color-white">June</h4>
 					<h6 class="cal-title-left color-white bolder">
-						<i class="fa fa-chevron-left"></i>
+						<i class="fa fa-chevron-left" id="prev-month-btn"></i>
 					</h6>
 					<h6 class="cal-title-right color-white bolder">
-						<i class="fa fa-chevron-right"></i>
+						<i class="fa fa-chevron-right" id="next-month-btn"></i>
 					</h6>
 				</div>
 				<div class="clear"></div>
@@ -57,51 +57,28 @@
 					<div class="clear"></div>
 				</div>
 				<div class="cal-dates cal-dates-border">
-					<!-- <a href="#" class="cal-disabled">25</a>
-					<a href="#" class="cal-disabled">26</a> 
-					<a href="#" class="cal-disabled">27</a>
-					<a href="#" class="cal-disabled">28</a> 
-					<a href="#" class="cal-disabled">29</a> 
-					<a href="#" class="cal-disabled">30</a>
-					<a href="#">1</a>
-					<a href="#">2</a> 
-					<a href="#">3</a>
-					<a href="#">4</a>
-					<a href="#">5</a>
-					<a href="#">6</a>
-					<a href="#">7</a>
-					<a href="#">8</a>
-					<a href="#">9</a>
-					<a href="#">10</a>
-					<a href="#">11</a>
-					<a href="#" class="cal-selected"><i class="fa fa-square"></i><span>12</span></a>
-					<a href="#">13</a>
-					<a href="#">14</a>
-					<a href="#">15</a>
-					<a href="#">16</a>
-					<a href="#">17</a>
-					<a href="#">18</a>
-					<a href="#">19</a>
-					<a href="#">20</a> 
-					<a href="#">21</a>
-					<a href="#">22</a>
-					<a href="#">23</a>
-					<a href="#">24</a>
-					<a href="#">25</a>
-					<a href="#">26</a>
-					<a href="#">27</a>
-					<a href="#">28</a>
-					<a href="#">29</a>
-					<a href="#">30</a>
-					<a href="#">31</a>
-					<a href="#" class="cal-disabled">1</a> 
-					<a href="#" class="cal-disabled">2</a>
-					<a href="#" class="cal-disabled">3</a> 
-					<a href="#" class="cal-disabled">4</a>
-					<a href="#" class="cal-disabled">5</a>
-					<div class="clear"></div> -->
+					<!-- ### 달력 생성 공간 ### -->
 				</div>
 			</div>
+			
+			<div class="calendar shadow-small round-small">
+				<div class="cal-footer">
+					<h6 class="cal-sub-title uppercase bold bg-dark2-dark">Schedule Box</h6>
+					<span class="cal-message top-15 bottom-15">
+						<i class="fa fa-bell font-18 color-green1-dark"></i>
+						<strong class="color-gray-dark">Reminder: Call the plumber for Kitchen Sink</strong>
+						<strong class="color-gray-dark">Reminder: Today is Karla Black's Birthday.</strong>
+					</span>
+					<div class="decoration bottom-0"></div>
+					<div class="cal-schedule">
+						<em>08:00 PM<br>10:00 AM</em>
+						<strong>Closing Hours</strong>
+						<span><i class="fa fa-map-marker"></i>Envato Headquarters</span>
+					</div>	
+				</div>
+			</div>
+
+
 
 		</div>
 	</div>
@@ -109,40 +86,60 @@
 $(function(){
 	
 	var now = new Date();
+	var year = now.getFullYear();
+	var month = now.getMonth();
+	var day = now.getDate();
 	createCalendar(now);
 	
+	
 	function createCalendar(date){
-		var year = date.getFullYear();
-		var month = date.getMonth();
-		var day = date.getDate();
+		year = date.getFullYear();
+		month = date.getMonth();
+		day = date.getDate();
+		var wrapper = $(".cal-dates-border");
+		wrapper.empty();
 		var title = $(".cal-title");
-		title.text((month+1) + "월")
+		title.text(year + "년 " + (month+1) + "월")
 		
 		var lastMonthEndDate = new Date(year, month, 0);
 		var dayOfWeek = lastMonthEndDate.getDay();
 		var lastDate = lastMonthEndDate.getDate();
 		
-		var wrapper = $(".cal-dates-border");
-		for(var i = dayOfWeek; i > -1; i--) {
+		for (var i = dayOfWeek; i > -1; i--) {
 		    wrapper.append("<a href='#' class='cal-disabled'>"+(lastDate-i)+"</a>");
 		}
 		
 		if (month == 11){
-			year++;
-			month = 0;
+			var endDate = new Date(year+1, 0, 0);
 		} else {
-			month++;
+			var endDate = new Date(year, month+1, 0);
 		}
 		var dayOfWeek = date.getDay();
-		var endDate = new Date(year, month, 0);
 		var date = endDate.getDate(); 
-		for(var i = 1; i < date+1; i++){
-		    wrapper.append("<a href='#'>"+i+"</a>");
+		for (var i = 1; i < date+1; i++){
+		    wrapper.append("<a href='#' id='"+i+"'>"+i+"</a>");
 		}
 		for (var i = 1; i<7-endDate.getDay(); i++){
 		    wrapper.append("<a href='#' class='cal-disabled'>"+i+"</a>");
 		}
+		
+		if (now.getMonth() == month && now.getFullYear() == year){
+			$("#"+now.getDate()).empty()
+				.addClass("cal-selected")
+				.append("<i class='fa fa-square'></i><span>"+now.getDate()+"</span>");
+		}
 	}
+	
+	$("#prev-month-btn").on("click", function(){
+		var prev = new Date(year, month-1, 1);
+		createCalendar(prev);
+	});
+
+	$("#next-month-btn").on("click", function(){
+		var next = new Date(year, month+1, 1);
+		createCalendar(next);
+	});
+	
 	
 });
 
