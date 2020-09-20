@@ -1,5 +1,9 @@
 package com.example.boot.service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +30,12 @@ public class DiaryService {
 			return true;
 		}
 		return false;
+	}
+
+	public List<Diary> getDairyList(String date) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate diaryDate = LocalDate.parse(date, formatter);
+		return repository.findAllByDiaryDate(diaryDate);
 	}
 	
 }

@@ -70,10 +70,12 @@
 						<strong class="color-gray-dark">Reminder: Today is Karla Black's Birthday.</strong>
 					</span>
 					<div class="decoration bottom-0"></div>
-					<div class="cal-schedule">
-						<em>08:00 PM<br>10:00 AM</em>
-						<strong>Closing Hours</strong>
-						<span><i class="fa fa-map-marker"></i>Envato Headquarters</span>
+					<div class="schedule-wrapper">
+						<div class="cal-schedule">
+							<em>08:00 PM<br>10:00 AM</em>
+							<strong>Closing Hours</strong>
+							<span><i class="fa fa-map-marker"></i>Envato Headquarters</span>
+						</div>
 					</div>	
 				</div>
 			</div>
@@ -89,6 +91,7 @@ $(function(){
 	var year = now.getFullYear();
 	var month = now.getMonth();
 	var day = now.getDate();
+	var monthText = "";
 	createCalendar(now);
 	
 	
@@ -114,10 +117,11 @@ $(function(){
 		} else {
 			var endDate = new Date(year, month+1, 0);
 		}
+		monthText = year + "-" + (month < 9 ? "0" + (month + 1) : month + 1);
 		var dayOfWeek = date.getDay();
 		var date = endDate.getDate(); 
 		for (var i = 1; i < date+1; i++){
-		    wrapper.append("<a href='#' id='"+i+"'>"+i+"</a>");
+		    wrapper.append("<a href='#' id='"+i+"' class='calendar-date'>"+i+"</a>");
 		}
 		for (var i = 1; i<7-endDate.getDay(); i++){
 		    wrapper.append("<a href='#' class='cal-disabled'>"+i+"</a>");
@@ -140,6 +144,33 @@ $(function(){
 		createCalendar(next);
 	});
 	
+	$(".calendar-date").on("click", function(){
+		var date = $(this).attr("id");
+		date = monthText + "-" + (date > 9 ? date : "0" + date );
+		var wrapper = $(".schedule-wrapper"); 
+		wrapper.empty();
+		console.log(date);
+		
+		$.ajax({
+		    url: "/diary/list", // 클라이언트가 요청을 보낼 서버의 URL 주소
+		    data: { date: date },                // HTTP 요청과 함께 서버로 보낼 데이터
+		    type: "GET",                             // HTTP 요청 방식(GET, POST)
+		 //   dataType: "json"                         // 서버에서 보내줄 데이터의 타입
+			success : function(result){
+				$.each(result, function(index, item){
+					var $div = $("<div class='cal-schedule'>");
+					var $em = $("<em>08:00 PM<br>10:00 AM</em>");
+					var $strong = $("<strong>"+item.title+"</strong>");
+					var $span = $("<span><i class='fa fa-map-marker'></i>Envato Headquarters</span>");
+					
+					$div.append($em);
+					$div.append($strong);
+					$div.append($span);
+					wrapper.append($div);
+				})
+			}
+		})
+	})
 	
 });
 
