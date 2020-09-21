@@ -19,5 +19,10 @@ public class MainController {
 		return mav;
 	}
 	
+	@GetMapping("/login")
+	public ModelAndView loginPage() {
+		ModelAndView mav = new ModelAndView("login");
+		return mav;
+	}
 	
 }

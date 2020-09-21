@@ -31,6 +31,7 @@ public class DiaryController {
 	
 	@GetMapping("/list")
 	public ResponseEntity<?> getDiaryList(@RequestParam int year, @RequestParam int month, @RequestParam int date){
+		System.out.println(year + " " + month + " " + date);
 		return ResponseEntity.ok(service.getDairyList(year, month, date));
 	}
 	

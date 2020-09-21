@@ -25,15 +25,17 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 
 		http
 	        .authorizeRequests()
-	            .antMatchers("/admin").permitAll()
+	            .antMatchers("/login").permitAll()
 //	            .antMatchers("/admin").hasRole("ADMIN")
 	            .anyRequest().authenticated()
 	            .and()
 	        .formLogin()
+	        	.loginPage("/login")
 	            .defaultSuccessUrl("/")
 	            .permitAll()
 	            .and()
-	        .logout();
+	        .logout()
+            	.logoutSuccessUrl("/login");
 	}
 	
 	@Bean
