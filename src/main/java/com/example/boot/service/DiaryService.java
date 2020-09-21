@@ -32,9 +32,8 @@ public class DiaryService {
 		return false;
 	}
 
-	public List<Diary> getDairyList(String date) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		LocalDate diaryDate = LocalDate.parse(date, formatter);
+	public List<Diary> getDairyList(int year, int month, int date) {
+		LocalDate diaryDate = LocalDate.of(year, month, date);
 		return repository.findAllByDiaryDate(diaryDate);
 	}
 	
