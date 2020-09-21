@@ -30,8 +30,8 @@ public class DiaryController {
 	}
 	
 	@GetMapping("/list")
-	public ResponseEntity<?> getDiaryList(@RequestParam String date){
-		return ResponseEntity.ok(service.getDairyList(date));
+	public ResponseEntity<?> getDiaryList(@RequestParam int year, @RequestParam int month, @RequestParam int date){
+		return ResponseEntity.ok(service.getDairyList(year, month, date));
 	}
 	
 	@ResponseBody
