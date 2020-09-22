@@ -25,7 +25,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 
 		http
 	        .authorizeRequests()
-	            .antMatchers("/login").permitAll()
+	            .antMatchers("/login"
+	            		, "/templates/**"
+	            		, "/static/**").permitAll()
 //	            .antMatchers("/admin").hasRole("ADMIN")
 	            .anyRequest().authenticated()
 	            .and()
@@ -53,7 +55,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
         web.ignoring().antMatchers(
         		"/templates/**"
         		, "/static/**"
-        		, "/_manifest.json");
+        		, "/login"
+        		, "/_manifest.json").anyRequest();
     }
 	
 	
