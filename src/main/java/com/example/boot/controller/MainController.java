@@ -8,6 +8,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainController {
 	
 	@GetMapping("/")
+	public String moveMain() {
+		return "redirect:/main";
+	}
+	
+	@GetMapping("/main")
 	public ModelAndView main() {
 		ModelAndView mav = new ModelAndView("main");
 		return mav;
