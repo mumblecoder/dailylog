@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html lagn="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-    <!-- 공통 헤더-->
-    <th:block th:replace="fragments/head :: headFragment"></th:block>
+	<head>
+    	<!-- 공통 헤더-->
+    	<th:block th:replace="fragments/head :: headFragment"></th:block>
 
-    <!-- 공통 스크립트-->
-    <th:block th:replace="fragments/script :: scriptFragment"></th:block>
+    	<!-- 공통 스크립트-->
+    	<th:block th:replace="fragments/script :: scriptFragment"></th:block>
+    	
+    	<style>
+    		.footer-menu:hover{
+    			cursor: pointer;
+    			background-color: #f2f2f2;
+    		}
+    	</style>
+    	
+    </head>
 
     <body class="is-not-ios theme-light">
         <div id="wrapper">
