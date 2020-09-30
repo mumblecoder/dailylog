@@ -65,17 +65,35 @@
 				<div class="cal-footer">
 					<div class="cal-sub-title uppercase bold bg-dark2-dark">
 						<span>Log Box</span>
+						
 						<div style="display: inline-block; float: right;">
-							<span id="new-log-btn" style="background-color: white; color: black; padding: 2px 7px; border-radius: 7px;">New Log 
-								<span style="color: black;" class="fa-fw select-all fas"></span>
-							</span>
+		                    <a href="#" data-menu="new-log-modal">
+								<span id="new-log-btn" style="background-color: white; color: black; padding: 2px 7px; border-radius: 7px;">
+									New Log 
+									<span style="color: black;" class="fa-fw select-all fas"></span>
+								</span>
+		                    </a>
 						</div>
 					</div>
+					
+					<div id="new-log-modal" class="menu menu-box-modal round-medium" data-menu-height="410" data-menu-width="90%" data-menu-effect="menu-over" style="height: 410px; width: 90%; opacity: 1; display: block;">
+				        <h1 class="center-text uppercase ultrabold top-30">Add New Log</h1>
+				        <p class="boxed-text-large under-heading bottom-40">
+				            Share our page with the world, increase <br>
+				            your page exposure with the world.
+				        </p>
+				        <div class="social-grid-3">
+				        
+				        </div>
+				    </div>
+					
+				<!-- 	
 					<span class="cal-message top-15 bottom-15">
 						<i class="fa fa-bell font-18 color-green1-dark"></i>
 						<strong class="color-gray-dark">Reminder: Call the plumber for Kitchen Sink</strong>
 						<strong class="color-gray-dark">Reminder: Today is Karla Black's Birthday.</strong>
-					</span>
+					</span> 
+				-->
 					<div class="decoration bottom-0"></div>
 					<div class="schedule-wrapper">
 					 <!-- 일기 생성 공간 -->
@@ -176,6 +194,8 @@ $(function(){
 			}
 		})
 	})
+	
+	
 	
 });
 
