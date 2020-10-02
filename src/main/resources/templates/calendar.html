@@ -68,15 +68,20 @@
 						<div style="display: inline-block; float: right;">
 		                    <a href="#" class="button button-xxs shadow-small button-round-small bg-yellow1-dark" style="margin-top:15px; line-height:15px;" data-menu="new-log-modal">
 								New Log 
-								<span style="color: black;" class="fa-fw select-all fas"></span>
+								<span class="fa-fw select-all fas"></span>
 		                    </a>
 						</div>
 					</div>
 					
-					<div id="new-log-modal" class="menu menu-box-modal round-medium" data-menu-height="410" data-menu-width="90%" data-menu-effect="menu-over" style="height: 410px; width: 90%; opacity: 1; display: block;">
+					<div id="new-log-modal" class="menu menu-box-modal round-medium" data-menu-height="500" data-menu-width="90%" data-menu-effect="menu-over" style="height: 410px; width: 90%; opacity: 1; display: block;">
 				        <h1 class="center-text uppercase ultrabold top-30">Add New Log</h1>
 				        
-				        <div style="margin:10px;">
+				        <div style="margin:20px;">
+					        <div class="input-style input-style-1 input-required">
+			                    <span class="input-style-1-active input-style-1-inactive">Diary Date</span>
+			                    <em><i class="fa fa-angle-down"></i></em>
+			                    <input id="diary-date" type="date" value="1980-08-26">
+			                </div>
 					        <div class="input-style input-style-2 input-required">
 			                    <span class="input-style-1-inactive">Title</span>
 			                    <em>(required)</em>
@@ -91,7 +96,7 @@
 		                
 		                <div class="content left-20 right-20">
 				            <div class="one-half">
-				                <a href="#" class="close-menu button button-center-large button-s shadow-large button-round-small bg-green1-dark">Write</a>
+				                <a href="#" id="write-btn" class="close-menu button button-center-large button-s shadow-large button-round-small bg-green1-dark">Write</a>
 				            </div>
 				            <div class="one-half last-column">
 				                <a href="#" class="close-menu button button-center-large button-s shadow-large button-round-small bg-red1-dark">Cancel</a>
@@ -178,9 +183,36 @@ $(function(){
 		var next = new Date(year, month+1, 1);
 		createCalendar(next);
 	});
+
+	$("#write-btn").on("click", function(){
+		$.ajax({
+		    url: "/diary",
+		    data: { 
+			    year: year,
+			    month: month+1,
+			    date: date
+		    },
+		    type: "put",
+		    dataType: "json",
+			success : function(result){
+				$.each(result, function(index, item){
+					var $div = $("<div class='cal-schedule'>");
+					var $em = $("<em>08:00 PM<br>10:00 AM</em>");
+					var $strong = $("<strong>"+item.title+"</strong>");
+					var $span = $("<span><i class='fa fa-map-marker'></i>"+item.content+"</span>");
+					
+					$div.append($em);
+					$div.append($strong);
+					$div.append($span);
+					wrapper.append($div);
+				})
+			}
+		})
+	});
 	
 	$(document).on('click', '.calendar-date', function(){
 		var date = $(this).attr("id");
+		$("#diary-date").val(year+"-"+(month+1)+"-"+date);
 		var wrapper = $(".schedule-wrapper"); 
 		wrapper.empty();
 		
@@ -208,6 +240,7 @@ $(function(){
 			}
 		})
 	})
+	
 	
 	
 	
