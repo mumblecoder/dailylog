@@ -85,18 +85,18 @@
 					        <div class="input-style input-style-2 input-required">
 			                    <span class="input-style-1-inactive">Title</span>
 			                    <em>(required)</em>
-			                    <input type="url" placeholder="">
+			                    <input type="text" id="title" placeholder="">
 			                </div>
 					        <div class="input-style input-style-2 input-required">
 			                    <span class="input-style-1-inactive">Content</span>
 			                    <em>(required)</em>
-			                    <textarea style="padding-top:20px !important; line-height: 20px; height: 200px !important;"></textarea>
+			                    <textarea id="diary-content" style="padding-top:20px !important; line-height: 20px; height: 200px !important;"></textarea>
 			                </div>
 		                </div>
 		                
 		                <div class="content left-20 right-20">
 				            <div class="one-half">
-				                <a href="#" id="write-btn" class="close-menu button button-center-large button-s shadow-large button-round-small bg-green1-dark">Write</a>
+				                <a href="#" id="write-btn" class="button button-center-large button-s shadow-large button-round-small bg-green1-dark">Write</a>
 				            </div>
 				            <div class="one-half last-column">
 				                <a href="#" class="close-menu button button-center-large button-s shadow-large button-round-small bg-red1-dark">Cancel</a>
@@ -185,13 +185,16 @@ $(function(){
 	});
 
 	$("#write-btn").on("click", function(){
+		var data = {
+				userSeq : 1,
+				diaryDate : $("#diary-date").val(),
+				title : $("#title").val(),
+				content : $("#diary-content").val()
+		};
 		$.ajax({
 		    url: "/diary",
-		    data: { 
-			    year: year,
-			    month: month+1,
-			    date: date
-		    },
+		    data: JSON.stringify(data),
+		    contentType :"application/json",
 		    type: "put",
 		    dataType: "json",
 			success : function(result){

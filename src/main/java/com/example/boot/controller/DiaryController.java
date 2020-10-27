@@ -22,7 +22,7 @@ public class DiaryController {
 	@Autowired
 	private DiaryService service;
 	
-	@GetMapping("/")
+	@GetMapping()
 	public ModelAndView getDiary(int seq) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("diary",service.getDiary(seq));
@@ -36,13 +36,13 @@ public class DiaryController {
 	}
 	
 	@ResponseBody
-	@PutMapping("/")
+	@PutMapping()
 	public ResponseEntity<?> updateDiary(@RequestBody Diary diary){
 		return ResponseEntity.ok(service.updateDiary(diary));
 	}
 	
 	@ResponseBody
-	@DeleteMapping("/")
+	@DeleteMapping()
 	public ResponseEntity<?> deleteDiary(int seq){
 		return ResponseEntity.ok(service.deleteDiary(seq));
 	}
