@@ -66,7 +66,8 @@
 					<div class="cal-sub-title uppercase bold bg-dark2-dark">
 						<span>Log Box</span>
 						<div style="display: inline-block; float: right;">
-		                    <a href="#" class="button button-xxs shadow-small button-round-small bg-yellow1-dark" style="margin-top:15px; line-height:15px;" data-menu="new-log-modal">
+		                    <a href="#" class="button button-xxs shadow-small button-round-small bg-yellow1-dark" 
+		                    	style="margin-top:15px; line-height:15px;" data-menu="new-log-modal" onclick="modalOpen();">
 								New Log 
 								<span class="fa-fw select-all fas"></span>
 		                    </a>
@@ -198,17 +199,20 @@ $(function(){
 		    type: "put",
 		    dataType: "json",
 			success : function(result){
-				$.each(result, function(index, item){
-					var $div = $("<div class='cal-schedule'>");
-					var $em = $("<em>08:00 PM<br>10:00 AM</em>");
-					var $strong = $("<strong>"+item.title+"</strong>");
-					var $span = $("<span><i class='fa fa-map-marker'></i>"+item.content+"</span>");
+				var wrapper = $(".schedule-wrapper");
+				/* wrapper.empty(); */
+				/* $.each(result, function(index, item){ */
+					var div = $("<div class='cal-schedule'>");
+					var em = $("<em>08:00 PM<br>10:00 AM</em>");
+					var strong = $("<strong>"+result.title+"</strong>");
+					var span = $("<span><i class='fa fa-map-marker'></i>"+result.content+"</span>");
 					
-					$div.append($em);
-					$div.append($strong);
-					$div.append($span);
-					wrapper.append($div);
-				})
+					div.append(em);
+					div.append(strong);
+					div.append(span);
+					wrapper.append(div);
+				/* }) */
+				$("#new-log-modal").removeClass("menu-active");
 			}
 		})
 	});
@@ -246,8 +250,12 @@ $(function(){
 	
 	
 	
-	
 });
+	
+function modalOpen(){
+	$('#diary-content').val(""); 
+	$('#title').val("");
+}
 
 
 </script>
